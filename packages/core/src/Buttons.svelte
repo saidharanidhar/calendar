@@ -71,7 +71,13 @@
             disabled={isToday}>{$buttonText[button]}</button
         >
     {:else if button == "viewDropDown"}
-        <select class="{$theme.button} ec-{button}" bind:value={$view}>
+        <select
+            class="{$theme.button} ec-{button}"
+            bind:value={$view}
+            style={$viewDropDownOptions.length === 0
+                ? "visibility: hidden"
+                : ""}
+        >
             {#each $viewDropDownOptions as key (key)}
                 <option value={key}>{$buttonText[key]}</option>
             {/each}
