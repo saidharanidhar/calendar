@@ -44,6 +44,9 @@
     function next() {
         $date = addDuration($date, $duration);
     }
+
+    $: dropDownVisibility =
+        $viewDropDownOptions.length > 0 ? "visible" : "hidden";
 </script>
 
 {#each buttons as button}
@@ -74,9 +77,7 @@
         <select
             class="{$theme.button} ec-{button}"
             bind:value={$view}
-            style={$viewDropDownOptions.length === 0
-                ? "visibility: hidden"
-                : ""}
+            style="visibility: {dropDownVisibility};"
         >
             {#each $viewDropDownOptions as key (key)}
                 <option value={key}>{$buttonText[key]}</option>
