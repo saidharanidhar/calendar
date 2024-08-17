@@ -69,7 +69,7 @@ export function createEventContent(chunk, displayEventEnd, eventContent, theme, 
     }
     
     if (content === undefined || content === null || content === '' ||
-        (content && (content.html === '' || content.html === null || content.html === undefined))) {
+        (content && (content.html === undefined || content.html === '' || content.html === null))) {
         let domNodes;
         switch (chunk.event.display) {
             case 'background':
