@@ -58,6 +58,7 @@ export function createOptions(plugins) {
         loading: undefined,
         locale: undefined,
         nowIndicator: false,
+        resourceToggleChecked: false,
         selectable: false,
         scrollTime: "06:00:00",
         slotDuration: "00:30:00",

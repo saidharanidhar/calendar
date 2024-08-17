@@ -23,6 +23,7 @@
         theme,
         view,
         viewDropDownOptions,
+        resourceToggleChecked,
     } = getContext("state");
 
     let today = setMidnight(createDate()),
@@ -47,6 +48,13 @@
 
     $: dropDownVisibility =
         $viewDropDownOptions.length > 0 ? "visible" : "hidden";
+
+    $: resourceToggleDisabled = ![
+        "timeGridDay",
+        "timeGridWeek",
+        "resourceTimeGridDay",
+        "resourceTimeGridWeek",
+    ].includes($view);
 </script>
 
 {#each buttons as button}
@@ -89,12 +97,56 @@
             on:click={$customButtons[button].click}
             >{$customButtons[button].text}</button
         >
+    {:else if button == "resourceToggle"}
+        <label class="ec-switch" title="Resource View">
+            <input
+                type="checkbox"
+                on:change={(event) => {
+                    if (event.target.checked) {
+                        if ($view === "timeGridDay") {
+                            $view = "resourceTimeGridDay";
+                        } else if ($view === "timeGridWeek") {
+                            $view = "resourceTimeGridWeek";
+                        }
+                        $resourceToggleChecked = true;
+                    } else {
+                        if ($view === "resourceTimeGridDay") {
+                            $view = "timeGridDay";
+                        } else if ($view === "resourceTimeGridWeek") {
+                            $view = "timeGridWeek";
+                        }
+                        $resourceToggleChecked = false;
+                    }
+                }}
+                disabled={resourceToggleDisabled}
+                checked={$resourceToggleChecked}
+            />
+            <span class="slider round"></span>
+        </label>
     {:else if button != ""}
         <button
-            class="{$theme.button}{$view === button
+            class="{$theme.button}{($resourceToggleChecked &&
+                $view === 'resourceTimeGridDay' &&
+                button === 'timeGridDay') ||
+            ($resourceToggleChecked &&
+                $view === 'resourceTimeGridWeek' &&
+                button === 'timeGridWeek') ||
+            $view === button
                 ? ' ' + $theme.active
                 : ''} ec-{button}"
-            on:click={() => ($view = button)}>{$buttonText[button]}</button
+            on:click={() => {
+                if ($resourceToggleChecked && button == "timeGridDay") {
+                    $view = "resourceTimeGridDay";
+                } else if ($resourceToggleChecked && button == "timeGridWeek") {
+                    $view = "resourceTimeGridWeek";
+                } else {
+                    $view = button;
+                    $resourceToggleChecked = false;
+                }
+                if (button != "timeGridDay" && button != "timeGridWeek") {
+                    $resourceToggleChecked = false;
+                }
+            }}>{$buttonText[button]}</button
         >
     {/if}
 {/each}
