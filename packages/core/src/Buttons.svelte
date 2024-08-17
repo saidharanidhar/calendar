@@ -98,7 +98,11 @@
             >{$customButtons[button].text}</button
         >
     {:else if button == "resourceToggle"}
-        <label class="ec-switch" title="Resource View">
+        <label
+            class="ec-switch"
+            title="Resource View"
+            style="display: {resourceToggleDisabled ? 'none' : 'block'};"
+        >
             <input
                 type="checkbox"
                 on:change={(event) => {

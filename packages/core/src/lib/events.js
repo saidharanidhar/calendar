@@ -1,8 +1,9 @@
-import {addDay, datesEqual, createDate, cloneDate, setMidnight, toLocalDate, toISOString, noTimePart, copyTime} from './date';
-import {createElement} from './dom';
+import {addDay, cloneDate, copyTime, createDate, datesEqual, noTimePart, setMidnight, toISOString, toLocalDate} from './date';
+
 import {assign} from './utils';
-import {toViewWithLocalDates} from './view';
+import {createElement} from './dom';
 import {is_function} from 'svelte/internal';
+import {toViewWithLocalDates} from './view';
 
 let eventId = 1;
 export function createEvents(input) {
@@ -65,7 +66,10 @@ export function createEventContent(chunk, displayEventEnd, eventContent, theme, 
                 view: toViewWithLocalDates(_view)
             })
             : eventContent;
-    } else {
+    }
+    
+    if (content === undefined || content === null || content === '' ||
+        (content && (content.html === '' || content.html === null || content.html === undefined))) {
         let domNodes;
         switch (chunk.event.display) {
             case 'background':
