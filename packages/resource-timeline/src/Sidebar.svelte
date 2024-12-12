@@ -17,7 +17,7 @@
     <div class="{$theme.sidebarTitle}" style="flex-basis: {titleHeight}px"></div>
     <div class="{$theme.content}" bind:this={$_sidebarEl}>
         {#each $_viewResources as resource}
-            <div class="{$theme.resource}" style="flex-basis: {max($_resHs.get(resource) ?? 0, 64)}px" role="rowheader">
+            <div class="{$theme.resource}" style="flex-basis: {64 || max($_resHs.get(resource) ?? 0, 64)}px" role="rowheader">
                 {#if $_nestedResources}
                     <Expander {resource} />
                 {/if}
