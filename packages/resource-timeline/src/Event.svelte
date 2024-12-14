@@ -51,8 +51,14 @@
             ;
         } else {
             // Month view
-            width = chunk.days * 100;
+            // width = chunk.days * 100;
+            // style =
+            //     `width:${width}%;`
+            // ;
+            let left = ((chunk.event.start - chunk.date) * 100) / (1000 * 60 * 60 * 24);
+            width = ((chunk.event.end - chunk.event.start) * 100) / (1000 * 60 * 60 * 24);
             style =
+                `left:${left}%;` +
                 `width:${width}%;`
             ;
         }
