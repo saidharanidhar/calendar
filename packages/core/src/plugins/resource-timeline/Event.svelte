@@ -12,7 +12,7 @@
     let margin = $state(helperEvent(chunk.event.display) ? 1 : 0);
     let event = $derived(chunk.event);
     // Style
-    let width = $derived('slots' in chunk ? chunk.slots * $slotWidth : chunk.days * 100);
+    let width = $derived('slots' in chunk ? chunk.slots * $slotWidth : ((chunk.event.end - chunk.event.start) * 100) / (1000 * 60 * 60 * 24));
     let styles = $derived(style => {
         if ('slots' in chunk) {
             let left = chunk.offset * $slotWidth;
@@ -20,6 +20,8 @@
             style['width'] = `${width}px`;
         } else {
             // Month view
+            let left = ((chunk.event.start - chunk.date) * 100) / (1000 * 60 * 60 * 24);
+            style['left'] = `${left}%`;
             style['width'] = `${width}%`;
         }
         let marginTop = margin;
