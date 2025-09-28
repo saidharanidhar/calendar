@@ -62,7 +62,7 @@
     role="cell"
     onpointerdown={$_interaction.action?.select}
 >
-    <div class="{$theme.events}">
+    <div class="{$theme.events}" data-date="{date.toISOString().split("T")[0]}" data-resource-id="{resource.id}">
         {#if !disabled}
             {#each dayBgChunks as chunk (chunk.event)}
                 <Event {chunk}/>

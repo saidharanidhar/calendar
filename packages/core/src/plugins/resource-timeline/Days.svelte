@@ -67,7 +67,7 @@
     }
 </script>
 
-<div class="{$theme.days}" style="flex-basis: {max(height, 64)}px" role="row">
+<div class="{$theme.days}" style="flex-basis: {max(height, 64)}px" role="row" data-resource-id="{resource.id}">
     {#each $_viewDates as date, i}
         <!-- svelte-ignore binding_property_non_reactive -->
         <Day {date} {resource} {chunks} {bgChunks} {longChunks} {iChunks} bind:this={refs[i]}/>
