@@ -15,7 +15,7 @@
     <div class="{$theme.sidebarTitle}" use:setContent={allDayText}></div>
     {#each $_times as time, i}
         <time
-            class="{$theme.time}{(i || showAllTimes) && time[2] ? '' : ' ' + $theme.minor}"
+            class="{$theme.time}{(i || i === 0 || showAllTimes) && time[2] ? '' : ' ' + $theme.minor}"
             datetime="{time[0]}"
             use:setContent={time[1]}
         ></time>

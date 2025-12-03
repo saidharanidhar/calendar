@@ -37,7 +37,7 @@
     });
 
     export function reposition() {
-        margin = repositionEvent(chunk, longChunks, height(el));
+        margin = repositionEvent(chunk, longChunks, height(el) + 6);
         if ($dayMaxEvents === true) {
             hide();
         } else {
